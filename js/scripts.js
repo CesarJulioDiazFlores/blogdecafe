@@ -21,11 +21,11 @@ formulario.addEventListener("submit", function(e){
     const{nombre, email,mensaje}= datos;
     
     if(nombre===""|| email===""||mensaje===""){
-        mostrarError("todos los campos son oblogatorios")
+        mostrarAlerta("todos los campos son oblogatorios", "error")
         return// corta la ejecucion
     }
     //enviar formulario
-    formularioValidado(" el formulario fue enviado")
+    mostrarAlerta(" el formulario fue enviado")
 })
 
 
@@ -34,24 +34,20 @@ function leertexto (evento){
     // console.log(datos)
     
 }
-function mostrarError(mensaje){
-    const error = document.createElement("P")
-    error.textContent= mensaje;
-    error.classList.add("error");
-    formulario.appendChild(error);
+
+function mostrarAlerta( mensaje, error=null){
+    const alerta= document.createElement("P")
+    alerta.textContent=mensaje
+    if(error){
+        alerta.classList.add("error");
+
+    }else{
+        alerta.classList.add("validado")
+    }
+    formulario.appendChild(alerta);
     
     setTimeout(() => {
-        error.remove()
-    }, 3000);
-}
-function formularioValidado(mensaje){
-    const validado = document.createElement("P")
-    validado.textContent= mensaje;
-    validado.classList.add("validado");
-    formulario.appendChild(validado);
-    
-    setTimeout(() => {
-        validado.remove()
+        alerta.remove()
     }, 3000);
 }
 
